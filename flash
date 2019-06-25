@@ -5,4 +5,4 @@ set -e
 command -v teensy_loader_cli >/dev/null 2>&1 || { echo >&2 "teensy_loader_cli is not installed"; exit 1; }
 test -f ./build/ergodox_ez.hex || { echo >&2 "Could not find build/ergodox_ez.hex file"; exit 1; }
 
-teensy_loader_cli -mmcu=atmega32u4 -w -v ./build/ergodox_ez.hex
+teensy_loader_cli --mcu=atmega32u4 -w -v ./build/ergodox_ez.hex
