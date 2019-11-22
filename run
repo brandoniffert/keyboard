@@ -1,11 +1,11 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 set -e
 
 docker build -t iffykeys .
 
 docker run --rm \
-  -v `pwd`/ergodox_ez:/qmk_firmware/keyboards/ergodox_ez/keymaps/ergodox_ez/ \
-  -v `pwd`/build:/qmk_firmware/build/ \
+  -v "$(pwd)/ergodox_ez:/qmk_firmware/keyboards/ergodox_ez/keymaps/ergodox_ez/" \
+  -v "$(pwd)/build:/qmk_firmware/build/" \
   iffykeys:latest \
   /bin/bash -c "make clean && make ergodox_ez:ergodox_ez && mv .build/ergodox_ez_ergodox_ez.hex /qmk_firmware/build/ergodox_ez.hex"
