@@ -15,7 +15,10 @@ enum custom_keycodes {
   PLACEHOLDER = SAFE_RANGE,
   EPRM,
   VRSN,
-  RGB_SLD
+  RGB_SLD,
+
+  MC_ARROW,
+  MC_HASH_ROCKET
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -50,7 +53,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_TRNS, KC_TRNS,        KC_TRNS,            KC_TRNS,      KC_TRNS,    KC_TRNS,        KC_TRNS,
       KC_TRNS, KC_TRNS,        KC_TRNS,            KC_UP,        KC_TRNS,    KC_TRNS,        KC_TRNS,
       RESET,   KC_TRNS,        KC_LEFT,            KC_DOWN,      KC_RIGHT,   KC_TRNS,
-      KC_TRNS, KC_TRNS,        KC_TRNS,            KC_TRNS,      KC_TRNS,    KC_TRNS,        KC_TRNS,
+      KC_TRNS, KC_TRNS,        KC_TRNS,            KC_TRNS,      KC_TRNS,    KC_TRNS,        MC_ARROW,
       KC_TRNS, KC_TRNS,        KC_TRNS,            KC_TRNS,      KC_TRNS,
 
       // Left thumb
@@ -59,11 +62,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_TRNS, KC_TRNS,        RGB_VAD,
 
       // Right hand
-      KC_TRNS, KC_TRNS,        KC_TRNS,            KC_TRNS,      KC_TRNS,    KC_TRNS,        KC_TRNS,
-      KC_TRNS, KC_TRNS,        KC_TRNS,            KC_TRNS,      KC_TRNS,    KC_TRNS,        KC_TRNS,
-      KC_TRNS, KC_TRNS,        KC_TRNS,            KC_TRNS,      KC_TRNS,    KC_TRNS,
-      KC_TRNS, KC_TRNS,        KC_TRNS,            KC_TRNS,      KC_TRNS,    KC_TRNS,        KC_TRNS,
-      KC_TRNS, KC_TRNS,        KC_TRNS,            KC_TRNS,      KC_TRNS,
+      KC_TRNS,        KC_TRNS,        KC_TRNS,            KC_TRNS,      KC_TRNS,    KC_TRNS,        KC_TRNS,
+      KC_TRNS,        KC_TRNS,        KC_TRNS,            KC_TRNS,      KC_TRNS,    KC_TRNS,        KC_TRNS,
+      KC_TRNS,        KC_TRNS,        KC_TRNS,            KC_TRNS,      KC_TRNS,    KC_TRNS,
+      MC_HASH_ROCKET, KC_TRNS,        KC_TRNS,            KC_TRNS,      KC_TRNS,    KC_TRNS,        KC_TRNS,
+      KC_TRNS,        KC_TRNS,        KC_TRNS,            KC_TRNS,      KC_TRNS,
 
       // Right thumb
       RGB_TOG, RGB_SLD,
@@ -177,6 +180,18 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case RGB_SLD:
       if (record->event.pressed) {
         rgblight_mode(1);
+      }
+      return false;
+      break;
+    case MC_ARROW:
+      if (record->event.pressed) {
+        SEND_STRING("->");
+      }
+      return false;
+      break;
+    case MC_HASH_ROCKET:
+      if (record->event.pressed) {
+        SEND_STRING("=>");
       }
       return false;
       break;
